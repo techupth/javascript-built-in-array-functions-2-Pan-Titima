@@ -374,5 +374,21 @@ const bills = [
 ];
 
 // Start coding here
+let uniqueLocation = [];
+for(let item of bills){
+    if(!uniqueLocation.includes(item.location)){
+        uniqueLocation.push(item.location);
+    }
+}
 
-const totalPaidByLocation;
+const totalPaidByLocation = {};
+for(let locationTemp of uniqueLocation){
+
+    let siteBill = bills.filter(x => x.location === locationTemp);
+    let siteBillTotal = siteBill.reduce(function(siteBill, bill){
+                        return siteBill + bill.total}, 0);
+    totalPaidByLocation[locationTemp] = siteBillTotal;
+}
+
+console.log(totalPaidByLocation);
+
