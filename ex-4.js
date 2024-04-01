@@ -374,4 +374,18 @@ const bills = [
 ];
 
 // Start coding here
-const totalMembers;
+const billMembers = bills.filter(x => x.member !== null).map(x => x.member.name);
+console.log(billMembers)
+
+function addNotDup(accumulator, current){   
+  if(!accumulator.includes(current)){
+      accumulator.push(current);
+  }
+  return accumulator;
+}
+
+let unique = billMembers.reduce(addNotDup, []);
+console.log(unique);
+
+let totalMembers = unique.length;
+console.log("Unique Members Count: " + totalMembers);
