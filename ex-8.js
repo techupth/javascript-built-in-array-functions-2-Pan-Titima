@@ -374,21 +374,13 @@ const bills = [
 ];
 
 // Start coding here
-let uniqueLocation = [];
-for(let item of bills){
-    if(!uniqueLocation.includes(item.location)){
-        uniqueLocation.push(item.location);
+
+let totalPaidByLocation = bills.reduce((accumulator, currentValue) => {
+    if (accumulator[currentValue.location] != undefined) {
+      accumulator[currentValue.location] += currentValue.total;
+    } else {
+      accumulator[currentValue.location] = currentValue.total;
     }
-}
-
-const totalPaidByLocation = {};
-for(let locationTemp of uniqueLocation){
-
-    let siteBill = bills.filter(x => x.location === locationTemp);
-    let siteBillTotal = siteBill.reduce(function(siteBill, bill){
-                        return siteBill + bill.total}, 0);
-    totalPaidByLocation[locationTemp] = siteBillTotal;
-}
-
-console.log(totalPaidByLocation);
-
+    return accumulator;
+  }, {});
+console.log("totalPaidByLocation: ", totalPaidByLocation);
